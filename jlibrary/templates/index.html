@@ -1,7 +1,16 @@
 Добро пожаловать в {{ title }}!
-Тут {{ count }} книг.
+Тут {{ books | length }} книг.
 
-{% for ans in answers %}
-<h3>{{ ans.q }}</h3>
-<p>>> {{ ans.a }}</p>
-{% endfor %}
+<table border="1">
+    {% for book in books %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ book.title }}</td>
+        <td>{{ book.ISBN }}</td>
+        <td>{{ book.description }}</td>
+        <td>{{ book.year_release }}</td>
+        <td>{{ book.author.full_name }}</td>
+        <td>{{ book.author.country }}</td>
+    </tr>
+    {% endfor %}
+</table>
