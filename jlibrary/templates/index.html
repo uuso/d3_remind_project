@@ -1,2 +1,7 @@
 Добро пожаловать в {{ title }}!
 Тут {{ count }} книг.
+
+{% for ans in answers %}
+<h3>{{ ans.q }}</h3>
+<p>>> {{ ans.a }}</p>
+{% endfor %}
