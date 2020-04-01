@@ -1,10 +1,10 @@
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import redirect
-# from django.db.models import Count
-from .models import Book, Publisher
-
-# Create your views here.
+from django.views.generic import ListView, CreateView
+from django.urls import reverse_lazy
+from .models import Author, Book, Publisher
+from .forms import AuthorForm
 
 
 def books_list(request):
@@ -55,3 +55,17 @@ def show_pubs(request):
             "books": books.filter(publisher=pub)})
 
     return HttpResponse(template.render(data))
+
+
+class AuthorEdit(CreateView):
+    model = Author
+    form_class = AuthorForm
+    success_url = reverse_lazy('jlib:author_list')
+    template_name = 'author_edit.html'
+
+
+class AuthorList(ListView):
+    model = Author
+    # we can get access to Author.objects.all() in the template
+    # using {{ object_list }} construction
+    template_name = 'author_list.html'
