@@ -1,10 +1,11 @@
-from django.http import HttpResponse
+from django.http.response import HttpResponse, HttpResponseRedirect
 from django.template import loader
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.views.generic import ListView, CreateView
 from django.urls import reverse_lazy
+from django.forms import formset_factory
 from .models import Author, Book, Publisher
-from .forms import AuthorForm
+from .forms import AuthorForm, BookCreatorsForm
 
 
 def books_list(request):
@@ -57,6 +58,21 @@ def show_pubs(request):
     return HttpResponse(template.render(data))
 
 
+def book_creators_many(request):
+    BCFormset = formset_factory(BookCreatorsForm, extra=2)
+    if request.method == "POST":
+        bc_formset = BCFormset(
+            request.POST, request.FILES, prefix="bookcreators")
+        if bc_formset.is_valid():
+            for form in bc_formset:
+                form.save()
+            return HttpResponseRedirect(reverse_lazy('jlib:author_list'))
+    else:
+        bc_formset = BCFormset(prefix="bookcreators")
+    return render(request, template_name='book_creators_edit.html',
+                  context={'bc_formset': bc_formset})
+
+
 class AuthorEdit(CreateView):
     model = Author
     form_class = AuthorForm
@@ -69,3 +85,9 @@ class AuthorList(ListView):
     # we can get access to Author.objects.all() in the template
     # using {{ object_list }} construction
     template_name = 'author_list.html'
+
+
+# class BookCreatorsEdit(CreateView):
+#     model = BookCreators
+#     form_class = BookCreatorsForm
+#     success_url = reverse_lazy
