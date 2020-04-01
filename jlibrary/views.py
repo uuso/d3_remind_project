@@ -48,9 +48,10 @@ def show_pubs(request):
     template = loader.get_template('show_publishers.html')
 
     data = {"publishers": []}
+    books = Book.objects.all().select_related('publisher')
     for pub in Publisher.objects.all():
         data["publishers"].append({
             "name": str(pub),
-            "books": Book.objects.filter(publisher=pub)})
+            "books": books.filter(publisher=pub)})
 
     return HttpResponse(template.render(data))
