@@ -8,6 +8,7 @@ class BookAdmin(admin.ModelAdmin):
     # fields = ('ISBN', 'title', 'description', 'year_release', 'author', 'copy_count', 'price')
     exclude = ('copy_count',)
 
+
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
     pass
