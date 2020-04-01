@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.template import loader
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db.models import Count
 from .models import Book, Author
 
@@ -16,4 +16,24 @@ def index(request):
         'title': 'мою библиотэку',
         'books': Book.objects.all()
         }
-    return HttpResponse(template.render(bib_data))
+    return HttpResponse(template.render(bib_data, request)) # добавлять request в рендеринг необходимо для вставки SCRF токена в страницу
+
+def book_inc(request):
+    if request.method == "POST":
+        book_id = request.POST['id']
+        if book_id:
+            book = Book.objects.get(id=book_id)            
+            if book:
+                book.copy_count += 1
+                book.save()
+    return redirect('/index/')
+
+def book_dec(request):
+    if request.method == "POST":
+        book_id = request.POST['id']
+        if book_id:
+            book = Book.objects.get(id=book_id)
+            if book and book.copy_count > 0:
+                book.copy_count -= 1
+                book.save()
+    return redirect('/index/')

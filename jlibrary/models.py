@@ -18,5 +18,10 @@ class Book(models.Model):
     copy_count = models.SmallIntegerField(default=1)
     price = models.DecimalField(max_digits = 7, decimal_places=2)
     
+    @staticmethod
+    def author_info(obj):
+        return f'{obj.author.full_name} [{obj.author.country}]'
+        # return obj.author.full_name
+
     def __str__(self):
         return self.title

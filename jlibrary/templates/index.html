@@ -2,6 +2,18 @@
 Тут {{ books | length }} книг.
 
 <table border="1">
+    <thead>
+        <th>id</th>
+        <th>title</th>
+        <th>ISBN</th>
+        <th>description</th>
+        <th>year</th>
+        <th>author</th>
+        <th>country</th>
+        <th>count</th>
+        <th>price</th>
+        <th>actions</th>
+    </thead>
     {% for book in books %}
     <tr>
         <td>{{ forloop.counter }}</td>
@@ -11,6 +23,20 @@
         <td>{{ book.year_release }}</td>
         <td>{{ book.author.full_name }}</td>
         <td>{{ book.author.country }}</td>
+        <td>{{ book.copy_count }}</td>
+        <td>{{ book.price }}</td>
+        <td>
+            <form action="/index/book_increment" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="id" value="{{ book.id }}">
+                <input type="submit" value="incr">
+            </form>
+            <form style="margin-bottom: 0;" action="/index/book_decrement" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="id" value="{{ book.id }}">
+                <input type="submit" value="decr">
+            </form>
+        </td>
     </tr>
     {% endfor %}
 </table>
