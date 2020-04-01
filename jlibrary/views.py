@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import redirect
 # from django.db.models import Count
-from .models import Book
+from .models import Book, Publisher
 
 # Create your views here.
 
@@ -42,3 +42,15 @@ def book_dec(request):
                 book.copy_count -= 1
                 book.save()
     return redirect('/index/')
+
+
+def show_pubs(request):
+    template = loader.get_template('show_publishers.html')
+
+    data = {"publishers": []}
+    for pub in Publisher.objects.all():
+        data["publishers"].append({
+            "name": str(pub),
+            "books": Book.objects.filter(publisher=pub)})
+
+    return HttpResponse(template.render(data))

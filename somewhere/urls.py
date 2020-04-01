@@ -23,4 +23,5 @@ urlpatterns = [
     path('index/', views.index),
     path('index/book_increment', views.book_inc),
     path('index/book_decrement', views.book_dec),
+    path('index/publishers/', views.show_pubs),
 ]
