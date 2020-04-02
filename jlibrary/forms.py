@@ -1,5 +1,5 @@
 from django import forms
-from .models import Author, BookCreators
+from .models import Author, BookCreator
 
 
 class AuthorForm(forms.ModelForm):
@@ -10,7 +10,7 @@ class AuthorForm(forms.ModelForm):
         fields = '__all__'
 
 
-class BookCreatorsForm(forms.ModelForm):
+class BookCreatorForm(forms.ModelForm):
     class Meta:
-        model = BookCreators
+        model = BookCreator
         fields = '__all__'

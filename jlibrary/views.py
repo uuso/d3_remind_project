@@ -5,7 +5,7 @@ from django.views.generic import ListView, CreateView
 from django.urls import reverse_lazy
 from django.forms import formset_factory
 from .models import Author, Book, Publisher
-from .forms import AuthorForm, BookCreatorsForm
+from .forms import AuthorForm, BookCreatorForm
 
 
 def books_list(request):
@@ -59,7 +59,7 @@ def show_pubs(request):
 
 
 def book_creators_many(request):
-    BCFormset = formset_factory(BookCreatorsForm, extra=2)
+    BCFormset = formset_factory(BookCreatorForm, extra=2)
     if request.method == "POST":
         bc_formset = BCFormset(
             request.POST, request.FILES, prefix="bookcreators")
@@ -87,7 +87,7 @@ class AuthorList(ListView):
     template_name = 'author_list.html'
 
 
-# class BookCreatorsEdit(CreateView):
-#     model = BookCreators
-#     form_class = BookCreatorsForm
+# class BookCreatorEdit(CreateView):
+#     model = BookCreator
+#     form_class = BookCreatorForm
 #     success_url = reverse_lazy
