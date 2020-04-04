@@ -1,7 +1,7 @@
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.shortcuts import redirect, render
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, TemplateView
 from django.urls import reverse_lazy
 from django.forms import formset_factory
 from .models import Author, Book, Publisher
@@ -87,7 +87,29 @@ class AuthorList(ListView):
     template_name = 'author_list.html'
 
 
-# class BookCreatorEdit(CreateView):
-#     model = BookCreator
-#     form_class = BookCreatorForm
-#     success_url = reverse_lazy
+class PublisherLView(ListView):
+    """Class-based views usage example  D6.4
+
+    Property "template_name" provides a way to override basic path
+        to template ("./templates/appname/modelname-list.html")
+        with ("./templates/$template_name").
+
+    You can access the objects by using {{ object_list }} construction
+        in the template.
+
+    """
+
+    # template_name = "publishers_listview.html"
+    model = Publisher
+
+
+class PublisherTView(TemplateView):
+    """Class-based views usage example  D6.4
+    """
+
+    template_name = "publishers_templateview.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["publishers"] = Publisher.objects.all()
+        return context
