@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buddy_list</title>
+</head>
+<body>
+    <h2>Список приятелей:</h2>
+    <ol>
+    {% for buddy in object_list %}
+        <li>
+            {{ buddy.full_name }} 
+            <sup>
+                <a href="{% url 'jlibrary:buddy-edit' buddy.pk %}">edit</a>
+                <a href="{% url 'jlibrary:buddy-delete' buddy.pk %}">[&times;]</a>
+            </sup>
+        </li>
+    {% endfor %}
+    </ol>
+    <br>
+    <a href="{% url 'jlibrary:buddy-create' %}">Добавить другого товарища</a>
+</body>
+</html>

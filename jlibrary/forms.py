@@ -3,7 +3,11 @@ from .models import Author, BookCreator
 
 
 class AuthorForm(forms.ModelForm):
-    full_name = forms.CharField(widget=forms.TextInput)
+    full_name = forms.CharField(widget=forms.TextInput) # переопределили стандартный виджет
+
+    def put_some_action(self):
+        """Функции, какие-то обработчики формы."""
+        pass
 
     class Meta:
         model = Author

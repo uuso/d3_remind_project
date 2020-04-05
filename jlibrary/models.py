@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from django.db import models
+from django.urls import reverse
 
 
 class Author(models.Model):
@@ -66,6 +67,10 @@ class Buddy(models.Model):
 
     def __str__(self):
         return self.full_name
+
+    def get_absolute_url(self): # замена success_url в CreateView, UpdateView
+        # return reverse('jlibrary:buddy-edit', kwargs={'pk': self.pk})
+        return reverse('jlibrary:buddy-list')
 
 
 class BookCreator(models.Model):

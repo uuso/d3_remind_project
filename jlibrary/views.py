@@ -4,10 +4,11 @@ from django.http.response import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.shortcuts import redirect, render
 from django.shortcuts import get_object_or_404
-from django.views.generic import ListView, CreateView, TemplateView, DetailView
+from django.views.generic import ListView, TemplateView, DetailView
+from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.forms import formset_factory
-from .models import Author, Book, Publisher
+from .models import Author, Book, Publisher, Buddy
 from .forms import AuthorForm, BookCreatorForm
 
 
@@ -77,18 +78,83 @@ def book_creators_many(request):
                   context={'bc_formset': bc_formset})
 
 
-class AuthorEdit(CreateView):
-    model = Author
-    form_class = AuthorForm
-    success_url = reverse_lazy('jlib:author_list')
-    template_name = 'author_edit.html'
-
-
 class AuthorList(ListView):
     model = Author
     # we can get access to Author.objects.all() in the template
     # using {{ object_list }} construction
     template_name = 'author_list.html'
+
+
+class AuthorEdit(CreateView):
+    """CBV-Form на основе модели.
+
+    Способ 1. Class-based view на основе ModelForm
+        а. Модель Author, форма AuthorForm(forms.ModelForm) на базе модели Author
+        б. Обработчик AuthorEdit(CreateView) с указанием модели, формы, шаблона
+        и success_url
+    """
+    model = Author
+    form_class = AuthorForm
+    success_url = reverse_lazy('jlib:author_list')
+    template_name = 'author_edit.html'
+
+    def form_valid(self, form):
+        """В случае валидности формы выполнятся эти действия:"""
+        form.put_some_action()
+        return super().form_valid(form)
+
+
+class BuddyListView(ListView):
+    model = Buddy
+
+
+class BuddyUpdateView(UpdateView):
+    model = Buddy  # можно раскомментировать и убрать get_object()
+    # def get_object(self, queryset=None):
+    #     # get_object_or_404  принимает аргументом Model, Manager, or QuerySet !!!
+    #     return get_object_or_404(Buddy.objects.filter(pk=self.kwargs["pk"]))
+    fields = ['full_name']
+    template_name = "jlibrary/buddy_form_edit.html"
+
+    def get_context_data(self, **kwargs):
+        """Добавлено исключительно для того, чтобы из шаблона вызвать delete по pk."""
+        context = super().get_context_data(**kwargs)
+        context["pk"] = self.kwargs["pk"]
+        return context
+
+
+class BuddyDeleteView(DeleteView):
+    model = Buddy
+
+    def get(self, *args, **kwargs):
+        """Позволяет обойти отображение шаблона для подтверждения удаления."""
+        return self.post(*args, **kwargs)
+
+    success_url = reverse_lazy("jlibrary:buddy-list")
+
+
+class BuddyCreateView(CreateView):
+    """CBV-Form на основе модели.
+
+    Способ 2 (для CreateView, UpdateView, DeleteView). Class-based view без ModelForm
+        а. Для работы CreateView и UpdateView - внутри модели требуется указать метод
+            get_absolute_url(self), который аналогичен работа поля success_url
+        б. В обработчике определить model=Buddy или метод get_object(self), а также:
+            для CreateView и UpdateView - определить список fields;
+            для DeleteView - определить success_url = reverse_lazy('<app_name:>author-list') -
+                это необходимо, он не смотрит на метод get_absolute_url из описания модели.
+        в. Описать шаблоны:
+            для CreateView и UpdateView - <app_name>/templates/<app_name>/<model_name>_form.html
+                Их можно разделить, если указать template_name или template_name_suffix.
+            для DeleteView - <app_name>/templates/<app_name>/<model_name>_confirm_delete.html
+                Можно обойти шаблон подтверждения переопределив метод get внутри DeleteView: 
+                    def get(self, *args, **kwargs): 
+                        return self.post(*args, **kwargs)
+        г. В urls.py указать пути, причём у UpdateView, DeleteView с аргументом <pk>
+    """
+    model = Buddy
+    # поле несовместимо с Meta внутри ModelForm, означают одно и то же
+    fields = ['full_name']
 
 
 class PublisherLView(ListView):
@@ -173,18 +239,13 @@ class PublisherDView(DetailView):
         указав свойство context_object_name="object".
     """
 
-    # slug_url_kwarg = "title"
-    # slug_field = "title"
+    slug_url_kwarg = "title"
+    slug_field = "title"
     # queryset = Publisher.objects.all()
 
     model = Publisher
 
-    def get_object(self, queryset=None):
-        # return Publisher.objects.filter(
-        #   title=self.kwargs["title"]).first() # выведет шаблон даже без найденного объекта
-
-        # если не найдёт объект - ошибка 404
-        return get_object_or_404(Publisher, title=self.kwargs['title'])
+    # def get_object(self, queryset=None): return get_object_or_404(Publisher, title=self.kwargs['title'])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
