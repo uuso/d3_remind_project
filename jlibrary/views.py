@@ -58,7 +58,12 @@ def show_pubs(request):
         data["publishers"].append({
             "name": str(pub),
             "books": books.filter(publisher=pub)})
+    # В этом случае вместо использования loader.get_template(path).render(data)
+    #   стоило бы использовать функцию loader.render_to_string(template_name,
+    #   context=None, request=None, using=None)
 
+    # Либо вообще!
+    # return render(request, template_name='show_publishers.html', context=data)
     return HttpResponse(template.render(data))
 
 
@@ -120,6 +125,7 @@ class BuddyUpdateView(UpdateView):
         """Добавлено исключительно для того, чтобы из шаблона вызвать delete по pk."""
         context = super().get_context_data(**kwargs)
         context["pk"] = self.kwargs["pk"]
+        context["longval"] = 10000000
         return context
 
 
@@ -147,8 +153,8 @@ class BuddyCreateView(CreateView):
             для CreateView и UpdateView - <app_name>/templates/<app_name>/<model_name>_form.html
                 Их можно разделить, если указать template_name или template_name_suffix.
             для DeleteView - <app_name>/templates/<app_name>/<model_name>_confirm_delete.html
-                Можно обойти шаблон подтверждения переопределив метод get внутри DeleteView: 
-                    def get(self, *args, **kwargs): 
+                Можно обойти шаблон подтверждения переопределив метод get внутри DeleteView:
+                    def get(self, *args, **kwargs):
                         return self.post(*args, **kwargs)
         г. В urls.py указать пути, причём у UpdateView, DeleteView с аргументом <pk>
     """
@@ -245,7 +251,8 @@ class PublisherDView(DetailView):
 
     model = Publisher
 
-    # def get_object(self, queryset=None): return get_object_or_404(Publisher, title=self.kwargs['title'])
+    # def get_object(self, queryset=None):
+    #     return get_object_or_404(Publisher, title=self.kwargs['title'])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
