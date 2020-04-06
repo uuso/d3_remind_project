@@ -125,8 +125,13 @@ class BuddyUpdateView(UpdateView):
         """Добавлено исключительно для того, чтобы из шаблона вызвать delete по pk."""
         context = super().get_context_data(**kwargs)
         context["pk"] = self.kwargs["pk"]
-        context["longval"] = 10000000
         return context
+
+    def put(self, request):
+        data = loads(request.body)
+        new_buddy = Buddy(**data)
+        new_buddy.save()
+        return HttpResponse("ok")
 
 
 class BuddyDeleteView(DeleteView):
