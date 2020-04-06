@@ -9,7 +9,7 @@ admin.site.register(Buddy)
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
     list_display = (
-        'title', 'publisher', 'authors_info', 'copies_in_stock', 
+        'title', 'publisher', 'authors_info', 'copies_in_stock',
         'copies_in_lease', 'price')
     exclude = ('copy_count',)
 

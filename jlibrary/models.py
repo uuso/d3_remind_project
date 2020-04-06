@@ -7,6 +7,7 @@ class Author(models.Model):
     full_name = models.TextField()
     country = models.CharField(max_length=2)
     birth_year = models.SmallIntegerField()
+    photo = models.ImageField(upload_to="jlibrary/images/author/", blank=True)
 
     def inspired(self):
         """Method to show many-to-many relition usage."""
@@ -45,6 +46,7 @@ class Book(models.Model):
         Publisher, on_delete=models.SET_NULL, null=True)
     copies_in_stock = models.SmallIntegerField(default=1)
     price = models.DecimalField(max_digits=7, decimal_places=2)
+    photo = models.ImageField(upload_to="jlibrary/images/book/", blank=True)
 
     def copies_in_lease(self):
         return self.leases.count()
@@ -70,7 +72,7 @@ class Buddy(models.Model):
 
     def get_absolute_url(self): # замена success_url в CreateView, UpdateView
         # return reverse('jlibrary:buddy-edit', kwargs={'pk': self.pk})
-        return reverse('jlibrary:buddy-list')
+        return reverse('jlib:buddy-list')
 
 
 class BookCreator(models.Model):

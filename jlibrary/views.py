@@ -12,9 +12,8 @@ from .models import Author, Book, Publisher, Buddy
 from .forms import AuthorForm, BookCreatorForm
 
 
-def books_list(request):
-    books = Book.objects.all()
-    return HttpResponse(books)
+def to_index(request):
+    return HttpResponseRedirect('index')
 
 
 def index(request):
@@ -76,7 +75,7 @@ def book_creators_many(request):
         if bc_formset.is_valid():
             for form in bc_formset:
                 form.save()
-            return HttpResponseRedirect(reverse_lazy('jlib:author_list'))
+            return HttpResponseRedirect(reverse_lazy('jlib:author-list'))
     else:
         bc_formset = BCFormset(prefix="bookcreators")
     return render(request, template_name='book_creators_edit.html',
@@ -100,7 +99,7 @@ class AuthorEdit(CreateView):
     """
     model = Author
     form_class = AuthorForm
-    success_url = reverse_lazy('jlib:author_list')
+    success_url = reverse_lazy('jlib:author-list')
     template_name = 'author_edit.html'
 
     def form_valid(self, form):
@@ -128,6 +127,7 @@ class BuddyUpdateView(UpdateView):
         return context
 
     def put(self, request):
+        # для работы нужен токен CSRF, как запустить - не разобрался пока
         data = loads(request.body)
         new_buddy = Buddy(**data)
         new_buddy.save()
@@ -140,8 +140,8 @@ class BuddyDeleteView(DeleteView):
     def get(self, *args, **kwargs):
         """Позволяет обойти отображение шаблона для подтверждения удаления."""
         return self.post(*args, **kwargs)
-
-    success_url = reverse_lazy("jlibrary:buddy-list")
+    
+    success_url = reverse_lazy("jlibrary:buddy-list") # необходимо, редирект после удаления
 
 
 class BuddyCreateView(CreateView):
@@ -191,8 +191,7 @@ class PublisherLView(ListView):
 
     def put(self, request):
         """HTTP method PUT receives a JSON to create new Publisher.
-        *   This method doesn't work in display views.
-            Use CreateView, FormView, etc instead.
+        It doesnt work without CSRF token. Donna how to deal with it.
         """
         data = loads(request.body)
         new_pub = self.model(**data)

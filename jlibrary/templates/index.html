@@ -12,7 +12,6 @@
         <th>description</th>
         <th>year</th>
         <th>author</th>
-        <th>country</th>
         <th>count</th>
         <th>price</th>
         <th>actions</th>
@@ -24,9 +23,8 @@
         <td>{{ book.ISBN }}</td>
         <td>{{ book.description }}</td>
         <td>{{ book.year_release }}</td>
-        <td>{{ book.author.full_name }}</td>
-        <td>{{ book.author.country }}</td>
-        <td>{{ book.copy_count }}</td>
+        <td>{{ book.authors_info }}</td>
+        <td>{{ book.copies_in_stock }}</td>
         <td>{{ book.price }}</td>
         <td>
             <form action="/index/book_increment" method="post" enctype="multipart/form-data">

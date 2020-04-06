@@ -260,9 +260,89 @@
         <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">12</field>
         <field name="codename" type="CharField">view_buddy</field>
     </object>
+    <object model="auth.permission" pk="53">
+        <field name="name" type="CharField">Can add book lease</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">9</field>
+        <field name="codename" type="CharField">add_booklease</field>
+    </object>
+    <object model="auth.permission" pk="54">
+        <field name="name" type="CharField">Can change book lease</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">9</field>
+        <field name="codename" type="CharField">change_booklease</field>
+    </object>
+    <object model="auth.permission" pk="55">
+        <field name="name" type="CharField">Can delete book lease</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">9</field>
+        <field name="codename" type="CharField">delete_booklease</field>
+    </object>
+    <object model="auth.permission" pk="56">
+        <field name="name" type="CharField">Can view book lease</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">9</field>
+        <field name="codename" type="CharField">view_booklease</field>
+    </object>
+    <object model="auth.permission" pk="57">
+        <field name="name" type="CharField">Can add publisher</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">10</field>
+        <field name="codename" type="CharField">add_publisher</field>
+    </object>
+    <object model="auth.permission" pk="58">
+        <field name="name" type="CharField">Can change publisher</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">10</field>
+        <field name="codename" type="CharField">change_publisher</field>
+    </object>
+    <object model="auth.permission" pk="59">
+        <field name="name" type="CharField">Can delete publisher</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">10</field>
+        <field name="codename" type="CharField">delete_publisher</field>
+    </object>
+    <object model="auth.permission" pk="60">
+        <field name="name" type="CharField">Can view publisher</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">10</field>
+        <field name="codename" type="CharField">view_publisher</field>
+    </object>
+    <object model="auth.permission" pk="61">
+        <field name="name" type="CharField">Can add buddy</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">11</field>
+        <field name="codename" type="CharField">add_buddy</field>
+    </object>
+    <object model="auth.permission" pk="62">
+        <field name="name" type="CharField">Can change buddy</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">11</field>
+        <field name="codename" type="CharField">change_buddy</field>
+    </object>
+    <object model="auth.permission" pk="63">
+        <field name="name" type="CharField">Can delete buddy</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">11</field>
+        <field name="codename" type="CharField">delete_buddy</field>
+    </object>
+    <object model="auth.permission" pk="64">
+        <field name="name" type="CharField">Can view buddy</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">11</field>
+        <field name="codename" type="CharField">view_buddy</field>
+    </object>
+    <object model="auth.permission" pk="65">
+        <field name="name" type="CharField">Can add book creator</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">12</field>
+        <field name="codename" type="CharField">add_bookcreator</field>
+    </object>
+    <object model="auth.permission" pk="66">
+        <field name="name" type="CharField">Can change book creator</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">12</field>
+        <field name="codename" type="CharField">change_bookcreator</field>
+    </object>
+    <object model="auth.permission" pk="67">
+        <field name="name" type="CharField">Can delete book creator</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">12</field>
+        <field name="codename" type="CharField">delete_bookcreator</field>
+    </object>
+    <object model="auth.permission" pk="68">
+        <field name="name" type="CharField">Can view book creator</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">12</field>
+        <field name="codename" type="CharField">view_bookcreator</field>
+    </object>
     <object model="auth.user" pk="1">
         <field name="password" type="CharField">pbkdf2_sha256$150000$Lwz6M5aLpSOr$q1CO8qWtT1AUXKB4a9Ts5PcQPARgXWzB5s7qvpSqWpU=</field>
-        <field name="last_login" type="DateTimeField">2020-04-02T19:58:34.695649+00:00</field>
+        <field name="last_login" type="DateTimeField">2020-04-06T20:19:32.137715+00:00</field>
         <field name="is_superuser" type="BooleanField">True</field>
         <field name="username" type="CharField">one</field>
         <field name="first_name" type="CharField"></field>
@@ -296,44 +376,55 @@
         <field name="session_data" type="TextField">MDZkZGNjODU3OTA1NjJkZTY3OGI3ZWM4YThiZTYzMjllOWVmOTFhZTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI4NGEyMTFiNjIyOGJiOGNjNWI2MzM1MjliOTY3MjA3YzhjZDg4M2RiIn0=</field>
         <field name="expire_date" type="DateTimeField">2020-04-14T12:50:32.756284+00:00</field>
     </object>
-    <object model="sessions.session" pk="ujbi20mfbazfu0lujjr1xd3brei8r7mm">
-        <field name="session_data" type="TextField">Yzc0MjNhN2E4NTU2N2U1OThkZWM4ZTUzNWNkMWY3YjBiZmU1NDFlYTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI2MzNkYjFjYmRkYzcyYWEyMmFmN2JiNjgxYzkzMzU4ZDgwNTAwZjIzIn0=</field>
-        <field name="expire_date" type="DateTimeField">2020-04-16T19:58:34.706227+00:00</field>
+    <object model="sessions.session" pk="sfhu3s3zt9e6iah1o1uo61c8wsg834ez">
+        <field name="session_data" type="TextField">ZDMxY2ZhZWM1NzVlNTc2OTg3MDUzNjIzMDQyNTdhODgzZGYyYzU4Mzp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIzYmNiZGJkYmVlMWM1OWRjNTgyMjRjNzI4NDNmYTkyMTlhZmU5ZDVjIn0=</field>
+        <field name="expire_date" type="DateTimeField">2020-04-20T20:19:32.145417+00:00</field>
+    </object>
+    <object model="sessions.session" pk="z0acbuby7spj1jq89ibmnpf700pcdsd0">
+        <field name="session_data" type="TextField">NWQxNGU5OTM0NmE5OTk0MzEwOTU4YjViYTVlMzVlZjFjNjFjNGNlNTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhY2VkYWIzYTUyY2ZmYmZjODQ5ZjQyMzViNTEyZTViOTI5YmZmNGZhIn0=</field>
+        <field name="expire_date" type="DateTimeField">2020-04-18T23:02:35.603665+00:00</field>
     </object>
     <object model="jlibrary.author" pk="1">
         <field name="full_name" type="TextField">Николай Васильевич Гоголь</field>
         <field name="country" type="CharField">RU</field>
         <field name="birth_year" type="SmallIntegerField">1809</field>
+        <field name="photo" type="FileField"></field>
     </object>
     <object model="jlibrary.author" pk="2">
         <field name="full_name" type="TextField">Пушкин Александр Сергеевич</field>
         <field name="country" type="CharField">RU</field>
         <field name="birth_year" type="SmallIntegerField">1799</field>
+        <field name="photo" type="FileField">jlibrary/images/author/pushkin.PNG</field>
     </object>
     <object model="jlibrary.author" pk="3">
         <field name="full_name" type="TextField">Тургенев Иван Сергеевич</field>
         <field name="country" type="CharField">RU</field>
         <field name="birth_year" type="SmallIntegerField">1818</field>
+        <field name="photo" type="FileField"></field>
     </object>
     <object model="jlibrary.author" pk="4">
         <field name="full_name" type="TextField">Douglas Adams</field>
         <field name="country" type="CharField">UK</field>
         <field name="birth_year" type="SmallIntegerField">1952</field>
+        <field name="photo" type="FileField"></field>
     </object>
     <object model="jlibrary.author" pk="5">
         <field name="full_name" type="TextField">Jerome David Salinger</field>
         <field name="country" type="CharField">US</field>
         <field name="birth_year" type="SmallIntegerField">1919</field>
+        <field name="photo" type="FileField">jlibrary/images/author/jdsalinger.jpg</field>
     </object>
     <object model="jlibrary.author" pk="6">
         <field name="full_name" type="TextField">Knut Hamsun</field>
         <field name="country" type="CharField">NO</field>
         <field name="birth_year" type="SmallIntegerField">1859</field>
+        <field name="photo" type="FileField"></field>
     </object>
     <object model="jlibrary.author" pk="7">
         <field name="full_name" type="TextField">Айн Рэнд</field>
         <field name="country" type="CharField">US</field>
         <field name="birth_year" type="SmallIntegerField">1905</field>
+        <field name="photo" type="FileField">jlibrary/images/author/aynrand.jpg</field>
     </object>
     <object model="jlibrary.publisher" pk="1">
         <field name="title" type="TextField">Издательская группа «АСТ»</field>
@@ -358,6 +449,7 @@
         <field name="publisher" rel="ManyToOneRel" to="jlibrary.publisher">2</field>
         <field name="copies_in_stock" type="SmallIntegerField">2</field>
         <field name="price" type="DecimalField">939.70</field>
+        <field name="photo" type="FileField"></field>
     </object>
     <object model="jlibrary.book" pk="2">
         <field name="ISBN" type="CharField">9785931240053</field>
@@ -367,6 +459,7 @@
         <field name="publisher" rel="ManyToOneRel" to="jlibrary.publisher">3</field>
         <field name="copies_in_stock" type="SmallIntegerField">1</field>
         <field name="price" type="DecimalField">789.15</field>
+        <field name="photo" type="FileField"></field>
     </object>
     <object model="jlibrary.book" pk="3">
         <field name="ISBN" type="CharField">9788588603271</field>
@@ -376,6 +469,7 @@
         <field name="publisher" rel="ManyToOneRel" to="jlibrary.publisher">2</field>
         <field name="copies_in_stock" type="SmallIntegerField">2</field>
         <field name="price" type="DecimalField">2284.66</field>
+        <field name="photo" type="FileField"></field>
     </object>
     <object model="jlibrary.book" pk="4">
         <field name="ISBN" type="CharField">9789755630311</field>
@@ -385,6 +479,7 @@
         <field name="publisher" rel="ManyToOneRel" to="jlibrary.publisher">2</field>
         <field name="copies_in_stock" type="SmallIntegerField">4</field>
         <field name="price" type="DecimalField">1884.04</field>
+        <field name="photo" type="FileField"></field>
     </object>
     <object model="jlibrary.book" pk="5">
         <field name="ISBN" type="CharField">9785457325753</field>
@@ -394,6 +489,7 @@
         <field name="publisher" rel="ManyToOneRel" to="jlibrary.publisher">3</field>
         <field name="copies_in_stock" type="SmallIntegerField">2</field>
         <field name="price" type="DecimalField">2170.84</field>
+        <field name="photo" type="FileField"></field>
     </object>
     <object model="jlibrary.book" pk="6">
         <field name="ISBN" type="CharField">9781072923893</field>
@@ -403,6 +499,7 @@
         <field name="publisher" rel="ManyToOneRel" to="jlibrary.publisher">3</field>
         <field name="copies_in_stock" type="SmallIntegerField">4</field>
         <field name="price" type="DecimalField">1644.10</field>
+        <field name="photo" type="FileField"></field>
     </object>
     <object model="jlibrary.book" pk="7">
         <field name="ISBN" type="CharField">9781447297017</field>
@@ -412,6 +509,7 @@
         <field name="publisher" rel="ManyToOneRel" to="jlibrary.publisher">3</field>
         <field name="copies_in_stock" type="SmallIntegerField">3</field>
         <field name="price" type="DecimalField">2044.16</field>
+        <field name="photo" type="FileField"></field>
     </object>
     <object model="jlibrary.book" pk="8">
         <field name="ISBN" type="CharField">9783036959542</field>
@@ -421,6 +519,7 @@
         <field name="publisher" rel="ManyToOneRel" to="jlibrary.publisher">2</field>
         <field name="copies_in_stock" type="SmallIntegerField">4</field>
         <field name="price" type="DecimalField">2092.53</field>
+        <field name="photo" type="FileField"></field>
     </object>
     <object model="jlibrary.book" pk="9">
         <field name="ISBN" type="CharField">9781447297017</field>
@@ -430,9 +529,10 @@
         <field name="publisher" rel="ManyToOneRel" to="jlibrary.publisher">1</field>
         <field name="copies_in_stock" type="SmallIntegerField">3</field>
         <field name="price" type="DecimalField">803.60</field>
+        <field name="photo" type="FileField"></field>
     </object>
     <object model="jlibrary.buddy" pk="1">
-        <field name="full_name" type="CharField">man1</field>
+        <field name="full_name" type="CharField">Второй человек на Луне</field>
     </object>
     <object model="jlibrary.buddy" pk="2">
         <field name="full_name" type="CharField">man2</field>
@@ -738,5 +838,194 @@
         <field name="object_repr" type="CharField">BookLease object (1)</field>
         <field name="action_flag" type="PositiveSmallIntegerField">1</field>
         <field name="change_message" type="TextField">[{"added": {}}]</field>
+    </object>
+    <object model="admin.logentry" pk="28">
+        <field name="action_time" type="DateTimeField">2020-04-04T23:03:22.596236+00:00</field>
+        <field name="user" rel="ManyToOneRel" to="auth.user">1</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">12</field>
+        <field name="object_id" type="TextField">26</field>
+        <field name="object_repr" type="CharField">BookCreator object (26)</field>
+        <field name="action_flag" type="PositiveSmallIntegerField">3</field>
+        <field name="change_message" type="TextField"></field>
+    </object>
+    <object model="admin.logentry" pk="29">
+        <field name="action_time" type="DateTimeField">2020-04-04T23:03:22.604614+00:00</field>
+        <field name="user" rel="ManyToOneRel" to="auth.user">1</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">12</field>
+        <field name="object_id" type="TextField">25</field>
+        <field name="object_repr" type="CharField">BookCreator object (25)</field>
+        <field name="action_flag" type="PositiveSmallIntegerField">3</field>
+        <field name="change_message" type="TextField"></field>
+    </object>
+    <object model="admin.logentry" pk="30">
+        <field name="action_time" type="DateTimeField">2020-04-04T23:03:22.615693+00:00</field>
+        <field name="user" rel="ManyToOneRel" to="auth.user">1</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">12</field>
+        <field name="object_id" type="TextField">24</field>
+        <field name="object_repr" type="CharField">BookCreator object (24)</field>
+        <field name="action_flag" type="PositiveSmallIntegerField">3</field>
+        <field name="change_message" type="TextField"></field>
+    </object>
+    <object model="admin.logentry" pk="31">
+        <field name="action_time" type="DateTimeField">2020-04-04T23:03:22.623045+00:00</field>
+        <field name="user" rel="ManyToOneRel" to="auth.user">1</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">12</field>
+        <field name="object_id" type="TextField">23</field>
+        <field name="object_repr" type="CharField">BookCreator object (23)</field>
+        <field name="action_flag" type="PositiveSmallIntegerField">3</field>
+        <field name="change_message" type="TextField"></field>
+    </object>
+    <object model="admin.logentry" pk="32">
+        <field name="action_time" type="DateTimeField">2020-04-04T23:03:22.632011+00:00</field>
+        <field name="user" rel="ManyToOneRel" to="auth.user">1</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">12</field>
+        <field name="object_id" type="TextField">22</field>
+        <field name="object_repr" type="CharField">BookCreator object (22)</field>
+        <field name="action_flag" type="PositiveSmallIntegerField">3</field>
+        <field name="change_message" type="TextField"></field>
+    </object>
+    <object model="admin.logentry" pk="33">
+        <field name="action_time" type="DateTimeField">2020-04-04T23:03:22.640714+00:00</field>
+        <field name="user" rel="ManyToOneRel" to="auth.user">1</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">12</field>
+        <field name="object_id" type="TextField">21</field>
+        <field name="object_repr" type="CharField">BookCreator object (21)</field>
+        <field name="action_flag" type="PositiveSmallIntegerField">3</field>
+        <field name="change_message" type="TextField"></field>
+    </object>
+    <object model="admin.logentry" pk="34">
+        <field name="action_time" type="DateTimeField">2020-04-04T23:03:22.647859+00:00</field>
+        <field name="user" rel="ManyToOneRel" to="auth.user">1</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">12</field>
+        <field name="object_id" type="TextField">20</field>
+        <field name="object_repr" type="CharField">BookCreator object (20)</field>
+        <field name="action_flag" type="PositiveSmallIntegerField">3</field>
+        <field name="change_message" type="TextField"></field>
+    </object>
+    <object model="admin.logentry" pk="35">
+        <field name="action_time" type="DateTimeField">2020-04-04T23:03:22.654718+00:00</field>
+        <field name="user" rel="ManyToOneRel" to="auth.user">1</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">12</field>
+        <field name="object_id" type="TextField">19</field>
+        <field name="object_repr" type="CharField">BookCreator object (19)</field>
+        <field name="action_flag" type="PositiveSmallIntegerField">3</field>
+        <field name="change_message" type="TextField"></field>
+    </object>
+    <object model="admin.logentry" pk="36">
+        <field name="action_time" type="DateTimeField">2020-04-04T23:03:22.661177+00:00</field>
+        <field name="user" rel="ManyToOneRel" to="auth.user">1</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">12</field>
+        <field name="object_id" type="TextField">18</field>
+        <field name="object_repr" type="CharField">BookCreator object (18)</field>
+        <field name="action_flag" type="PositiveSmallIntegerField">3</field>
+        <field name="change_message" type="TextField"></field>
+    </object>
+    <object model="admin.logentry" pk="37">
+        <field name="action_time" type="DateTimeField">2020-04-04T23:03:22.667744+00:00</field>
+        <field name="user" rel="ManyToOneRel" to="auth.user">1</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">12</field>
+        <field name="object_id" type="TextField">17</field>
+        <field name="object_repr" type="CharField">BookCreator object (17)</field>
+        <field name="action_flag" type="PositiveSmallIntegerField">3</field>
+        <field name="change_message" type="TextField"></field>
+    </object>
+    <object model="admin.logentry" pk="38">
+        <field name="action_time" type="DateTimeField">2020-04-04T23:03:22.675640+00:00</field>
+        <field name="user" rel="ManyToOneRel" to="auth.user">1</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">12</field>
+        <field name="object_id" type="TextField">16</field>
+        <field name="object_repr" type="CharField">BookCreator object (16)</field>
+        <field name="action_flag" type="PositiveSmallIntegerField">3</field>
+        <field name="change_message" type="TextField"></field>
+    </object>
+    <object model="admin.logentry" pk="39">
+        <field name="action_time" type="DateTimeField">2020-04-04T23:03:22.682418+00:00</field>
+        <field name="user" rel="ManyToOneRel" to="auth.user">1</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">12</field>
+        <field name="object_id" type="TextField">15</field>
+        <field name="object_repr" type="CharField">BookCreator object (15)</field>
+        <field name="action_flag" type="PositiveSmallIntegerField">3</field>
+        <field name="change_message" type="TextField"></field>
+    </object>
+    <object model="admin.logentry" pk="40">
+        <field name="action_time" type="DateTimeField">2020-04-04T23:03:22.691289+00:00</field>
+        <field name="user" rel="ManyToOneRel" to="auth.user">1</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">12</field>
+        <field name="object_id" type="TextField">14</field>
+        <field name="object_repr" type="CharField">BookCreator object (14)</field>
+        <field name="action_flag" type="PositiveSmallIntegerField">3</field>
+        <field name="change_message" type="TextField"></field>
+    </object>
+    <object model="admin.logentry" pk="41">
+        <field name="action_time" type="DateTimeField">2020-04-04T23:03:22.700126+00:00</field>
+        <field name="user" rel="ManyToOneRel" to="auth.user">1</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">12</field>
+        <field name="object_id" type="TextField">13</field>
+        <field name="object_repr" type="CharField">BookCreator object (13)</field>
+        <field name="action_flag" type="PositiveSmallIntegerField">3</field>
+        <field name="change_message" type="TextField"></field>
+    </object>
+    <object model="admin.logentry" pk="42">
+        <field name="action_time" type="DateTimeField">2020-04-04T23:03:22.709244+00:00</field>
+        <field name="user" rel="ManyToOneRel" to="auth.user">1</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">12</field>
+        <field name="object_id" type="TextField">12</field>
+        <field name="object_repr" type="CharField">BookCreator object (12)</field>
+        <field name="action_flag" type="PositiveSmallIntegerField">3</field>
+        <field name="change_message" type="TextField"></field>
+    </object>
+    <object model="admin.logentry" pk="43">
+        <field name="action_time" type="DateTimeField">2020-04-04T23:03:22.716589+00:00</field>
+        <field name="user" rel="ManyToOneRel" to="auth.user">1</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">12</field>
+        <field name="object_id" type="TextField">11</field>
+        <field name="object_repr" type="CharField">BookCreator object (11)</field>
+        <field name="action_flag" type="PositiveSmallIntegerField">3</field>
+        <field name="change_message" type="TextField"></field>
+    </object>
+    <object model="admin.logentry" pk="44">
+        <field name="action_time" type="DateTimeField">2020-04-05T13:27:28.597430+00:00</field>
+        <field name="user" rel="ManyToOneRel" to="auth.user">1</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">11</field>
+        <field name="object_id" type="TextField">5</field>
+        <field name="object_repr" type="CharField">Станислав2</field>
+        <field name="action_flag" type="PositiveSmallIntegerField">3</field>
+        <field name="change_message" type="TextField"></field>
+    </object>
+    <object model="admin.logentry" pk="45">
+        <field name="action_time" type="DateTimeField">2020-04-05T13:27:28.605137+00:00</field>
+        <field name="user" rel="ManyToOneRel" to="auth.user">1</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">11</field>
+        <field name="object_id" type="TextField">4</field>
+        <field name="object_repr" type="CharField">Станислав</field>
+        <field name="action_flag" type="PositiveSmallIntegerField">3</field>
+        <field name="change_message" type="TextField"></field>
+    </object>
+    <object model="admin.logentry" pk="46">
+        <field name="action_time" type="DateTimeField">2020-04-06T20:23:02.288457+00:00</field>
+        <field name="user" rel="ManyToOneRel" to="auth.user">1</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">7</field>
+        <field name="object_id" type="TextField">7</field>
+        <field name="object_repr" type="CharField">Айн Рэнд</field>
+        <field name="action_flag" type="PositiveSmallIntegerField">2</field>
+        <field name="change_message" type="TextField">[{"changed": {"fields": ["photo"]}}]</field>
+    </object>
+    <object model="admin.logentry" pk="47">
+        <field name="action_time" type="DateTimeField">2020-04-06T20:23:12.577316+00:00</field>
+        <field name="user" rel="ManyToOneRel" to="auth.user">1</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">7</field>
+        <field name="object_id" type="TextField">5</field>
+        <field name="object_repr" type="CharField">Jerome David Salinger</field>
+        <field name="action_flag" type="PositiveSmallIntegerField">2</field>
+        <field name="change_message" type="TextField">[{"changed": {"fields": ["photo"]}}]</field>
+    </object>
+    <object model="admin.logentry" pk="48">
+        <field name="action_time" type="DateTimeField">2020-04-06T20:23:22.082068+00:00</field>
+        <field name="user" rel="ManyToOneRel" to="auth.user">1</field>
+        <field name="content_type" rel="ManyToOneRel" to="contenttypes.contenttype">7</field>
+        <field name="object_id" type="TextField">2</field>
+        <field name="object_repr" type="CharField">Пушкин Александр Сергеевич</field>
+        <field name="action_flag" type="PositiveSmallIntegerField">2</field>
+        <field name="change_message" type="TextField">[{"changed": {"fields": ["photo"]}}]</field>
     </object>
 </django-objects>
