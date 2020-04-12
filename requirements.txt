@@ -1,4 +1,4 @@
-django==2.2.11
-psycopg2
+django==2.2.12
+# psycopg2
 dj_database_url
 pillow==7.1.1
