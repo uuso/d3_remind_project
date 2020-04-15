@@ -18,8 +18,9 @@ def to_index(request):
 
 def index(request):
     template = loader.get_template('index.html')
+    # template = loader.get_template('jlibrary/index.html')
     bib_data = {
-        'title': 'мою библиотэку',
+        'title': 'мою библиотэкс',
         'books': Book.objects.all()
     }
     # добавлять request в рендеринг необходимо для вставки SCRF токена в страницу
@@ -32,7 +33,7 @@ def book_inc(request):
         if book_id:
             book = Book.objects.get(id=book_id)
             if book:
-                book.copy_count += 1
+                book.copies_in_stock += 1
                 book.save()
     return redirect('/index/')
 
@@ -42,14 +43,14 @@ def book_dec(request):
         book_id = request.POST['id']
         if book_id:
             book = Book.objects.get(id=book_id)
-            if book and book.copy_count > 0:
-                book.copy_count -= 1
+            if book and book.copies_in_stock > 0:
+                book.copies_in_stock -= 1
                 book.save()
     return redirect('/index/')
 
 
 def show_pubs(request):
-    template = loader.get_template('show_publishers.html')
+    template = loader.get_template('jlibrary/show_publishers.html')
 
     data = {"publishers": []}
     books = Book.objects.all().select_related('publisher')
@@ -78,7 +79,7 @@ def book_creators_many(request):
             return HttpResponseRedirect(reverse_lazy('jlib:author-list'))
     else:
         bc_formset = BCFormset(prefix="bookcreators")
-    return render(request, template_name='book_creators_edit.html',
+    return render(request, template_name='jlibrary/book_creators_edit.html',
                   context={'bc_formset': bc_formset})
 
 
@@ -86,7 +87,7 @@ class AuthorList(ListView):
     model = Author
     # we can get access to Author.objects.all() in the template
     # using {{ object_list }} construction
-    template_name = 'author_list.html'
+    template_name = 'jlibrary/author_list.html'
 
 
 class AuthorEdit(CreateView):
@@ -100,7 +101,7 @@ class AuthorEdit(CreateView):
     model = Author
     form_class = AuthorForm
     success_url = reverse_lazy('jlib:author-list')
-    template_name = 'author_edit.html'
+    template_name = 'jlibrary/author_edit.html'
 
     def form_valid(self, form):
         """В случае валидности формы выполнятся эти действия:"""
@@ -128,6 +129,7 @@ class BuddyUpdateView(UpdateView):
 
     def put(self, request):
         # для работы нужен токен CSRF, как запустить - не разобрался пока
+        # не работает
         data = loads(request.body)
         new_buddy = Buddy(**data)
         new_buddy.save()
@@ -201,7 +203,7 @@ class PublisherLView(ListView):
 class PublisherTView(TemplateView):
     """Class-based views usage example  D6.4"""
 
-    template_name = "publishers_templateview.html"
+    template_name = "jlibrary/publishers_templateview.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -262,3 +264,15 @@ class PublisherDView(DetailView):
         context = super().get_context_data(**kwargs)
         context["now"] = timezone.now()
         return context
+
+
+class BookUpdateView(UpdateView):
+    model = Book
+    fields = ['photo']
+    success_url = reverse_lazy('index')
+
+    def get_object(self):
+        return get_object_or_404(Book, id=self.kwargs.get('pk'))
+    # def post(self, request, *args, **kwargs):
+    #     print(request.POST)
+    #     return super().post(request, *args, **kwargs)

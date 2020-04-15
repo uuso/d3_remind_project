@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index_page</title>
+</head>
+<body>
+    {% if username %}
+    <h2>Привет, {{ username }} ({{ age }} лет)!</h2>
+    <p>Тут ты можешь <a href="{% url 'common:logout' %}">выйти</a>.</p>  
+    {% else %}
+    <p>Тебе нужно <a href="{% url 'common:login' %}">войти</a> на сайт!</p>  
+    {% endif %}
+</body>
+</html>

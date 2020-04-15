@@ -1,0 +1,15 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.book-poster {
+    width: inherit;
+}
+.book-params span{    
+    flex: 0 0 auto;
+}
+.book-params .param-filler {
+    flex-grow: 5;
+    border-bottom: 1px dotted #6c757d;
+    margin: 0 0.5em;
+}

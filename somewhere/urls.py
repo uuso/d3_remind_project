@@ -23,8 +23,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.to_index),
     path('', include('jlibrary.urls', namespace='jlib')),
+    path('common/', include('common.urls', namespace='common')),
     path('index/', views.index, name="index"),
-    path('index/book_increment', views.book_inc),
-    path('index/book_decrement', views.book_dec),
+    path('index/book_increment/', views.book_inc),
+    path('index/book_decrement/', views.book_dec),
     path('index/publishers/', views.show_pubs),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

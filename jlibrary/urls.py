@@ -2,6 +2,7 @@ from django.urls import path
 from .views import AuthorEdit, AuthorList, book_creators_many
 from .views import PublisherLView, PublisherTView, PublisherDView
 from .views import BuddyListView, BuddyCreateView, BuddyUpdateView, BuddyDeleteView
+from .views import BookUpdateView
 
 app_name = 'jlibrary'
 
@@ -16,4 +17,5 @@ urlpatterns = [
     path('publishers/listview', PublisherLView.as_view()),
     path('publishers/templateview', PublisherTView.as_view()),
     path('publishers/detailview/<title>', PublisherDView.as_view()),
+    path('books/<pk>/', BookUpdateView.as_view(), name='book-edit'),
 ]
