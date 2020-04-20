@@ -2,8 +2,8 @@
 {% block title %}Создание профайла{% endblock title %}
 {% block content %}
 <form method="post">  
-  {% csrf_token %}  
-    {{ form.as_ul }}  
-    <input type="submit" value="Создание профайла">  
+	{% csrf_token %}  
+	{{ form.as_ul }}  
+	<input type="submit" value="Создание профайла">  
 </form>  
 {% endblock content %}

@@ -1,71 +1,56 @@
-from django.http.response import HttpResponseRedirect
-from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.shortcuts import render
+from django.views.generic import FormView
+from django.http.response import HttpResponseRedirect
 
 from django.contrib import auth
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
-from django.views.generic import FormView
 from .models import UserProfile
 from .forms import ProfileCreationForm
 
 
+def index(request):	
+	context = {}
+	if request.user.is_authenticated:
+		context['username'] = request.user.username
+		context['age'] = UserProfile.objects.get(user=request.user).age
+		
+	return render(request, template_name="common/index.html", context=context)
+
+
 class RegisterView(FormView):
-    form_class = UserCreationForm
+	form_class = auth.forms.UserCreationForm
+	template_name = 'common/user-create.html'
+	success_url = reverse_lazy('common:profile-create')
 
-    template_name = 'common/register.html'
-    success_url = reverse_lazy('common:profile-create')
+	def form_valid(self, form):
+		form.save()
+		username = form.cleaned_data.get('username')
+		raw_password = form.cleaned_data.get('password1')
+		
+		# login(request, user, backend=None)
+		# authenticate(request=None, **credentials)
+		auth.login(self.request, auth.authenticate(username=username, password=raw_password))
 
-    def form_valid(self, form):
-        form.save()
-        username = form.cleaned_data.get('username')
-        raw_pass = form.cleaned_data.get('password')        
-        login(self.request, authenticate(username=username, password=raw_pass))
-        return super(RegisterView, self).form_valid(form)
-
-
-class CreateUserProfile(FormView):
-    form_class = ProfileCreationForm
-    template_name = 'common/profile-create.html'
-    success_url = reverse_lazy('common:index')
-
-    def dispatch(self, request, *args, **kwargs):
-        if self.request.user.is_anonymous:
-            return HttpResponseRedirect(reverse_lazy('common:login'))
-        return super(CreateUserProfile, self).dispatch(request, *args, **kwargs)
-
-    def form_valid(self, form):
-        instance = form.save(commit=False)
-        instance.user = self.request.user
-        instance.save()
-        return super(CreateUserProfile, self).form_valid(form)
+		return super(RegisterView, self).form_valid(form)
 
 
-def index(request):
-    context = dict()
-    if request.user.is_authenticated:
-        context["username"] = request.user.username
-        context['age'] = UserProfile.objects.get(user=request.user).age
+class CreateUserProfileView(FormView):
+	form_class = ProfileCreationForm
+	template_name = 'common/profile-create.html'
+	success_url = reverse_lazy('common:index')
 
-    return render(request, "common/index.html", context)
+	# dispatch(request, *args, **kwargs)
+	# The view part of the view – the method that accepts a request argument 
+	#     plus arguments, and returns a HTTP response.
+	def dispatch(self, request, *args, **kwargs):
+		# if self.request.user.is_anonymous:
+		if not self.request.user.is_authenticated:
+			return HttpResponseRedirect(reverse_lazy('common:user-login'))
+		return super(CreateUserProfileView, self).dispatch(request, *args, **kwargs)
 
-
-def loginv(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request=request, data=request.POST)
-        if form.is_valid():
-            auth.login(request, form.get_user())
-            print("valid")
-            return HttpResponseRedirect(reverse_lazy('common:index'))
-        print("invalid")
-        context = {'form': form}
-    else:
-        print("get")
-        context = {'form': AuthenticationForm()}
-    return render(request, 'common/login.html', context)
-
-
-def logoutv(request):
-    auth.logout(request)
-    return HttpResponseRedirect(reverse_lazy('common:index'))
+	def form_valid(self, form):
+		instance = form.save(commit=False) # не отправлять, но создать
+		instance.user = self.request.user # добавим поле в форму
+		instance.save() # а вот ее уже готовим к отправке
+		return super(CreateUserProfileView, self).form_valid(form)
