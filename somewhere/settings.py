@@ -40,7 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'jlibrary',
     'common',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github', # https://github.com/settings/applications/new
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -104,6 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LOGIN_REDIRECT_URL = reverse_lazy('common:index')
 LOGOUT_REDIRECT_URL = reverse_lazy('common:index')
+ACCOUNT_LOGOUT_REDIRECT_URL = reverse_lazy('common:index') # allauth https://django-allauth.readthedocs.io/en/latest/configuration.html?highlight=ACCOUNT_LOGOUT_REDIRECT_URL
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -135,3 +143,9 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "staticfiles/"), ]
 
 MEDIA_URL = '/media_url/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root/')
+
+
+AUTHENTICATION_BACKENDS = (
+	'django.contrib.auth.backends.ModelBackend', # для логина по username в административную панель
+	'allauth.account.auth_backends.AuthenticationBackend',
+)

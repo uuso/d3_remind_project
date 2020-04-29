@@ -1,4 +1,5 @@
-from datetime import datetime, timedelta
+import os
+import datetime
 from django.db import models
 from django.urls import reverse
 
@@ -31,6 +32,10 @@ class Publisher(models.Model):
         return f'{self.title} ({self.city}, {self.country})'
 
 
+def upload_bookpic(instance, filename):
+    _, fext = os.path.splitext(filename)
+    return "jlibrary/images/book/{}".format(str(instance.pk)+fext)
+
 class Book(models.Model):
     ISBN = models.CharField(max_length=13)
     title = models.TextField()
@@ -46,7 +51,7 @@ class Book(models.Model):
         Publisher, on_delete=models.SET_NULL, null=True)
     copies_in_stock = models.SmallIntegerField(default=1)
     price = models.DecimalField(max_digits=7, decimal_places=2)
-    photo = models.ImageField(upload_to="jlibrary/images/book/", blank=True)
+    photo = models.ImageField(upload_to=upload_bookpic, blank=True)
 
     def copies_in_lease(self):
         return self.leases.count()
@@ -85,6 +90,8 @@ class BookCreator(models.Model):
     inspirer = models.ForeignKey(
         Author, on_delete=models.SET_NULL, related_name="inspired_by", blank=True, null=True)
 
+def calculate_default_leasetime():
+    return datetime.date.today() + datetime.timedelta(weeks=2)
 
 class BookLease(models.Model):
     """Class provides each buddy-book relations."""
@@ -92,4 +99,4 @@ class BookLease(models.Model):
     buddy = models.ForeignKey(Buddy, on_delete=models.PROTECT, related_name="leases")
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="leases")
     lease_date = models.DateField(auto_now_add=True)
-    leaseover_date = models.DateField(default=datetime.today()+timedelta(weeks=2))
+    leaseover_date = models.DateField(default=calculate_default_leasetime)

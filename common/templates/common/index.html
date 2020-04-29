@@ -7,12 +7,13 @@
 </head>
 <body>
 	{% if username %}
-	<h2>Привет, {{ username }} ({{ age }} лет)!</h2>
+	<h2>Привет, {{ username }} ({{ github_url }})!</h2>
 	<p>Тут ты можешь <a href="{% url 'common:user-logout' %}">выйти</a>.</p>  
 	{% else %}
 	<p>Привет! Тебе следует авторизоваться.</p>
+	{% comment %} <p><a href="{% url 'account_login' %}">Войти</a></p>   {% endcomment %}
 	<p><a href="{% url 'common:user-login' %}">Войти</a></p>  
-	<p><a href="{% url 'common:user-register' %}">Зарегистрироваться</a></p>  
+	{% comment %} <p><a href="{% url 'common:user-register' %}">Зарегистрироваться</a></p>   {% endcomment %}
 	{% endif %}
 </body>
 </html>

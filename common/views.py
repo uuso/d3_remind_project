@@ -4,7 +4,7 @@ from django.views.generic import FormView
 from django.http.response import HttpResponseRedirect
 
 from django.contrib import auth
-
+from allauth.socialaccount.models import SocialAccount
 from .models import UserProfile
 from .forms import ProfileCreationForm
 
@@ -13,8 +13,10 @@ def index(request):
 	context = {}
 	if request.user.is_authenticated:
 		context['username'] = request.user.username
-		context['age'] = UserProfile.objects.get(user=request.user).age
-		
+		# context['age'] = UserProfile.objects.get(user=request.user).age
+		context['github_url'] = SocialAccount.objects.get(
+			provider='github', user=request.user).extra_data['html_url']
+
 	return render(request, template_name="common/index.html", context=context)
 
 
@@ -35,6 +37,7 @@ class RegisterView(FormView):
 		return super(RegisterView, self).form_valid(form)
 
 
+# pre-allauth:
 class CreateUserProfileView(FormView):
 	form_class = ProfileCreationForm
 	template_name = 'common/profile-create.html'
