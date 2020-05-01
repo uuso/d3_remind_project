@@ -1,19 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>index_page</title>
-</head>
-<body>
+{% extends 'base_bootstrap.html' %}
+{% block title %}Common page{% endblock title %}
+{% block content %}
 	{% if username %}
-	<h2>Привет, {{ username }} ({{ github_url }})!</h2>
+	<h2>Привет, {{ username }} ({% if provider %}
+	{{ url }}@{{ provider}}{% else %}local-user{% endif %})!</h2>
+	<p>{{ data }}</p>
+	<p><a href="{% url 'common:user-info' %}">Страница редактирования профиля</a></p>
 	<p>Тут ты можешь <a href="{% url 'common:user-logout' %}">выйти</a>.</p>  
 	{% else %}
-	<p>Привет! Тебе следует авторизоваться.</p>
-	{% comment %} <p><a href="{% url 'account_login' %}">Войти</a></p>   {% endcomment %}
-	<p><a href="{% url 'common:user-login' %}">Войти</a></p>  
-	{% comment %} <p><a href="{% url 'common:user-register' %}">Зарегистрироваться</a></p>   {% endcomment %}
+	<p>Привет! Тебе следует авторизоваться.</p>	
+	<p><a href="{% url 'common:user-login-socials' %}">Войти (соцсети или логин-пароль)</a></p>
+	<p><a href="{% url 'common:user-register' %}">Зарегистрироваться</a></p>  
 	{% endif %}
-</body>
-</html>
+{% endblock content %}

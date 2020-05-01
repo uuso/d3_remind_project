@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY') if os.environ.get('SECRET_KEY') else "asdasdasd"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'jlibrary',
     'common',
     'django.contrib.sites',
@@ -111,7 +112,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LOGIN_REDIRECT_URL = reverse_lazy('common:index')
 LOGOUT_REDIRECT_URL = reverse_lazy('common:index')
-ACCOUNT_LOGOUT_REDIRECT_URL = reverse_lazy('common:index') # allauth https://django-allauth.readthedocs.io/en/latest/configuration.html?highlight=ACCOUNT_LOGOUT_REDIRECT_URL
+# allauth https://django-allauth.readthedocs.io/en/latest/configuration.html?highlight=ACCOUNT_LOGOUT_REDIRECT_URL
+ACCOUNT_LOGOUT_REDIRECT_URL = reverse_lazy('common:index')
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/

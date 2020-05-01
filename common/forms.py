@@ -1,8 +1,6 @@
 from django import forms
-from .models import UserProfile
 
-class ProfileCreationForm(forms.ModelForm):
-    class Meta:
-        fields = ('age', )
-        # fields = ['age']
-        model = UserProfile
+class UserInfoForm(forms.Form):
+    city = forms.CharField(max_length=14, label="Город проживания", required=False)
+    birth_city = forms.CharField(max_length=25, label="Родной город", required=False)
+    about = forms.CharField(max_length=256, label="О себе", required=False, widget=forms.Textarea)

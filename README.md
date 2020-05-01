@@ -12,6 +12,7 @@
 Путь| Назначение|
 -|-
 [*/*](http://he1.before.best/)                   |Наконец сделал редирект|
+[*/common*](http://he1.before.best/common)|D7 - практика регистрации пользователей и работы с allauth
 [*/admin*](http://he1.before.best/admin)              |Админка, больше всего информации тут|
 [*/index/*](http://he1.before.best/index/)              |Список книг|
 [*/buddy/*](http://he1.before.best/buddy/)|Просмотр, удаление, редактирование друзей

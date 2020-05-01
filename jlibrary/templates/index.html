@@ -21,8 +21,10 @@
         <div class="col d-flex justify-content-around">
             <a class="btn btn-outline-dark" href="{% url 'jlibrary:buddy-create' %}">Зарегистрировать друга</a>
             <a class="btn btn-outline-dark" href="{% url 'jlibrary:author-create' %}">Зарегистрировать автора</a>
-            <a class="btn btn-outline-dark disabled" href="/publishers/create">Зарегистрировать издательство</a>
-            <a class="btn btn-outline-dark disabled" href="/books/create">Зарегистрировать книгу</a>
+            <a class="btn btn-warning" href="/admin">Админка</a>
+            {% comment %} <a class="btn btn-outline-dark disabled" href="/publishers/create">Зарегистрировать издательство</a> {% endcomment %}
+            <a class="btn btn-success" href="{% url 'common:index' %}">Вход пользователя</a>
+            {% comment %} <a class="btn btn-outline-dark disabled" href="/books/create">Зарегистрировать книгу</a> {% endcomment %}
         </div>
     </div>
 

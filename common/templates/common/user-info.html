@@ -1,0 +1,16 @@
+{% extends 'base_bootstrap.html' %}
+{% block title %}Регистрация{% endblock title %}
+{% block content %}
+{% if user %}
+<h2>Изменение данных пользователя {{ user.username }}</h2>
+<form method="post">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Подтвердить изменения">
+</form>
+
+{% else %}
+<h2>Похоже, вы еще не <a href="{% url 'common:user-login-socials' %}">авторизовались</a>.</h2>
+
+{% endif %}
+{% endblock content %}
