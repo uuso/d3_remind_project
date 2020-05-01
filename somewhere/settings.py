@@ -33,8 +33,8 @@ ALLOWED_HOSTS = ['.before.best', '.herokuapp.com', '127.0.0.1', 'localhost']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+    'django.contrib.contenttypes', #https://code.djangoproject.com/ticket/10827#comment:12
     'django.contrib.auth',
-    'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
